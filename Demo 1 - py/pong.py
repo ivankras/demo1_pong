@@ -149,9 +149,9 @@ class Paleta(pygame.sprite.Sprite):
 	    self.speed = [0, 3.3]
 	    #if pelota.speed[0] >= 0 and pelota.rect.centerx >= SCREEN_WIDTH / 2:
 	    if pelota.speed[0] >= 0 and pelota.rect.centerx >= FULLSCREEN_WIDTH / 2:
-	        if self.rect.centery > pelota.rect.centery:
+	        if (self.rect.centery > pelota.rect.centery) and (self.rect.centery < (FULLSCREEN_HEIGHT - self.speed[1])) :
 	            self.rect.centery -= self.speed[1]
-	        if self.rect.centery < pelota.rect.centery:
+	        if self.rect.centery < pelota.rect.centery and (self.rect.centery > (self.speed[1])):
 	            self.rect.centery += self.speed[1]
 		    
 # ----------------------------------------------
@@ -164,12 +164,15 @@ def main():
     screen = pygame.display.set_mode((FULLSCREEN_WIDTH, FULLSCREEN_HEIGHT), 0, 32)
     #screen = pygame.display.set_mode((1500, 780), pygame.FULLSCREEN)
     
-    pygame.display.set_caption("Tutorial pygame - pong simple")
+    icon = load_image("pong_icon.png", IMG_DIR, True)
+    pygame.display.set_icon(icon)
+    
+    pygame.display.set_caption("Pong - Command control")
     
     fuente = pygame.font.Font(None, 45)
     
     # se cargan los objetos
-    fondo = load_image("fondoPong1600.jpg", IMG_DIR)
+    fondo = load_image("blackParquet.jpg", IMG_DIR)
     #fondo = pygame.transform.scale(f, (FULLSCREEN_WIDTH, FULLSCREEN_HEIGHT))
     bola = Pelota()
     marcador = Marcador()
